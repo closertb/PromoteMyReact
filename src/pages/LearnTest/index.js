@@ -1,6 +1,13 @@
 import React from 'react';
-import { Form } from 'antd';
-import { formRender } from '../../components';
+import moment from 'moment';
+import { Form, Row, Col, Select, DatePicker, TimePicker, InputNumber } from 'antd';
+import { formRender, OriginSearchWithRenderProp, DaynamicForm } from '../../components';
+import { formItemLayout } from '../../configs/constants';
+
+const FormItem = Form.Item;
+const Option = Select.Option;
+const { RangePicker } = DatePicker;
+const format = 'HH:mm';
 
 let FormRender;
 const mockFetch = ({ keyword }) =>
@@ -36,11 +43,134 @@ class LearnTest extends React.Component {
     FormRender = formRender({ getFieldDecorator });
   }
   render() {
+    const originProps = {
+      searchKey: 'keyword',
+      fetchData: mockFetch 
+    };
     return (
-      <div style={{ width: 300 }}>
-        <FormRender field={field} data={{ id: ''}}/>
-      </div>
-
+      <Form>
+        <Row>
+          <Col span={8}>
+            <FormRender field={field} data={{ id: '' }} />
+          </Col>
+          <Col span={8}>
+            <FormItem {...formItemLayout} label="renderProps">
+              <OriginSearchWithRenderProp {...originProps}>
+                {(datas) => 
+                  datas.map(({id, name}, index) => (
+                    <Option key={index}>{`${name}(${id})`}</Option>
+                  ))
+                }
+              </OriginSearchWithRenderProp>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={15}>
+            <FormItem {...formItemLayout} label="分布规则">
+              <DaynamicForm name="dispenses2">
+                {(rule, actions) => <span key={rule.key}>
+                  <InputNumber
+                    style={{ margin: '0 5px', width: 140 }}
+                    value={rule.min}
+                    min={0.01}
+                    step={0.01}
+                    precision={2}
+                    placeholder=">0, 保留2位小数"
+                    onChange={e => actions.handleChange(e, rule.key, 'min')}
+                  />元    到
+                  <InputNumber
+                    style={{ margin: '0 5px', width: 140 }}
+                    value={rule.max}
+                    min={rule.min || 0.01}
+                    step={0.01}
+                    precision={2}
+                    placeholder=">0, 保留2位小数"
+                    onChange={e => actions.handleChange(e, rule.key, 'max')}
+                  />
+                  元    占比
+                  <InputNumber
+                    style={{ margin: '0 5px', width: 140 }}
+                    min={1}
+                    step={1}
+                    precision={0}
+                    value={rule.ratio}
+                    placeholder=">0, 正整数"
+                    onChange={e => actions.handleChange(e, rule.key, 'ratio')}
+                  />%
+                </span>}
+              </DaynamicForm>
+            </FormItem>
+          </Col>
+          <Col span={9}>
+            <FormItem {...formItemLayout} label="满减规则">
+              <DaynamicForm key="fullRules">
+                {(rule, actions) => <span key={rule.key}>
+                  <span>满</span>
+                  <InputNumber
+                    style={{ margin: '0 5px', width: 100 }}
+                    value={rule.full}
+                    min={0.01}
+                    step={0.01}
+                    precision={2}
+                    placeholder=">0, 2位小数"
+                    onChange={e => actions.handleChange(e, rule.key, 'full')}
+                  />元，减
+                  <InputNumber
+                    style={{ margin: '0 5px', width: 100 }}
+                    value={rule.reduction}
+                    min={0.01}
+                    step={0.01}
+                    precision={2}
+                    placeholder=">0, 2位小数"
+                    onChange={e => actions.handleChange(e, rule.key, 'reduction')}
+                  />
+                  元
+                </span>}
+              </DaynamicForm>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={15}>
+            <FormItem {...formItemLayout} label="使用时间限制">
+              <DaynamicForm key="suiteConsumeTimespanArr">
+                {(rule, actions) => <span key={rule.key}>
+                  <TimePicker
+                    format={format}
+                    style={{ width: 100 }}
+                    placeholder="请选择"
+                    value={rule.start && moment(rule.start, format)}
+                    onChange={e => actions.handleChange(e, rule.key, 'start')}
+                  />  到
+                  <TimePicker
+                    format={format}
+                    placeholder="请选择"
+                    style={{ width: 100, marginLeft: 10 }}
+                    value={rule.end && moment(rule.end, format)}
+                    onChange={e => actions.handleChange(e, rule.key, 'end')}
+                  />
+                </span>}
+              </DaynamicForm>
+            </FormItem>
+          </Col>     
+          <Col span={9}>
+            <FormItem {...formItemLayout} label="禁用期规则">
+              <DaynamicForm key="limitDateArr">
+                {(rule, actions) => <span key={rule.key}>
+                  <RangePicker
+                    format={'YYYY-MM-DD'}
+                    style={{ width: 228 }}
+                    value={rule.time || []}
+                    className="search-range-picker"
+                    onChange={e => actions.handleChange(e, rule.key, 'time')}
+                  />
+                </span>}
+              </DaynamicForm>
+            </FormItem>
+          </Col> 
+        </Row>
+      </Form>
     );
   }
 }
