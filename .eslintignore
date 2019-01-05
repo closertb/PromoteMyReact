@@ -1,4 +1,5 @@
 .eslintignore
 proxy.config.js
 webpack.config.js
+build/**
 mock/**
