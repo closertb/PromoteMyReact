@@ -4,18 +4,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const args = process.argv;
-console.log(args);
 
 module.exports = {
+  // mode: 'production',
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, './dist')
   },
   devServer: {
     host: '0.0.0.0',
     inline: true,
-    port: 8080,
+    port: 8089,
     contentBase: path.join(__dirname, './dist'),
   },
   module: {
@@ -35,13 +35,13 @@ module.exports = {
         }
       }, {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       }, {
         test: /\.scss$/,
-        use: ['css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader,'css-loader', 'sass-loader']
       }, {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: ['css-loader', 'less-loader']
       }
     ]
   },

@@ -4,8 +4,8 @@ import { Form, Modal } from 'antd';
 Function.prototype.getName = function () {
   return this.name || this.toString().match(/function\s*([^(]*)\(/)[1];
 };
-let oldChild;
-let HComponent;
+//let oldChild;
+// let HComponent;
 export default function withModal(Component){
   class HModal extends React.Component {
     constructor(props) {
@@ -17,10 +17,12 @@ export default function withModal(Component){
       };
       this.handleCancel = this.handleCancel.bind(this);
       this.handleOk = this.handleOk.bind(this);
+      console.log('create');
     }
     // eslint-disable-next-line
     componentWillReceiveProps({ visible, confirmLoading }) {
       // 若 visible 为 false，表示主动关闭弹框
+      console.log('update');
       if (visible === false) {
         return this.setState({ visible });
       }

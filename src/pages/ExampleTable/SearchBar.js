@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col, Form, Button } from 'antd';
 
-export default function SearchBar(props) {
+function SearchBar(props) {
+  console.log('SearchBar update');
   const { formRender, onSearch, search, searchFields, operate } = props;
   return (
     <Form className="h-search-form">
@@ -19,3 +20,5 @@ export default function SearchBar(props) {
     </Form>
   );
 }
+
+export default React.memo(SearchBar);
