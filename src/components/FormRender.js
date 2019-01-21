@@ -73,7 +73,7 @@ export default function (params) {
       break;
     case 'select':
     // eslint-disable-next-line
-      const { related, relatedKey, enums = [], onSelect: onChange = () => {}, defaultValue } = field;
+      const { related, relatedKey, enums = [], onChange = () => {}, defaultValue } = field;
       content = (!related || typeof data[relatedKey] !== 'undefined') && (
         <FormItem key={key} label={name} {...formItemLayout}>
           {getFieldDecorator(key, {

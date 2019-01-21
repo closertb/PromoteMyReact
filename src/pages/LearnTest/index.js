@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import { Form, Row, Col, Select, DatePicker, TimePicker, InputNumber } from 'antd';
+import { Form, Row, Col, Select, DatePicker, TimePicker, Input, InputNumber, Button } from 'antd';
+import { editFields } from './fields';
 import { formRender, OriginSearchWithRenderProp, DaynamicForm } from '../../components';
 import { formItemLayout } from '../../configs/constants';
 
@@ -40,15 +41,56 @@ class LearnTest extends React.Component {
   constructor(props){
     super(props);
     const { form: { getFieldDecorator } } = props;
+    this.state = {};
     FormRender = formRender({ getFieldDecorator });
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(value) {
+    const {
+      form: { validateFields }
+    } = this.props;
+    this.setState({ required: !!value }, () => {
+      if (!value) {
+        validateFields(['reason'], { force: true });
+      }
+    });  }
+  handleSubmit() {
+    const { form: { validateFields } } = this.props;
+    validateFields((errors, values) => {
+      if(errors) {
+        return;
+      }
+      console.log(values);
+    });
   }
   render() {
+    const { form: { getFieldDecorator } } = this.props;
+    const { required } = this.state;
     const originProps = {
       searchKey: 'keyword',
       fetchData: mockFetch 
     };
+    console.log('df', required);
     return (
       <Form>
+        <Row>
+          <Col span={8}>
+            <FormRender field={{ onChange: this.handleChange, ...editFields.status }} />
+          </Col>
+          <Col span={8}>
+            <FormItem label="原因" {...formItemLayout} >
+              {
+                getFieldDecorator('reason',{
+                  rules: [{ required, message: '启用时原因必填' }]
+                })(<Input />)
+              }
+            </FormItem>    
+          </Col>
+          <Col>
+            <Button onClick={this.handleSubmit}>提交</Button>
+          </Col>
+        </Row>
         <Row>
           <Col span={8}>
             <FormRender field={field} data={{ id: '' }} />
@@ -63,7 +105,7 @@ class LearnTest extends React.Component {
                 }
               </OriginSearchWithRenderProp>
             </FormItem>
-          </Col>
+          </Col>   
         </Row>
         <Row>
           <Col span={15}>
@@ -169,6 +211,9 @@ class LearnTest extends React.Component {
               </DaynamicForm>
             </FormItem>
           </Col> 
+        </Row>
+        <Row>
+          
         </Row>
       </Form>
     );

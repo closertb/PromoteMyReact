@@ -5,11 +5,48 @@
   return yield sec;
 } */
 
-function printMe() {
-  console.log('I get called from print.js!');
-  console.log('change me!');
+/* const fibonacci = {
+  [Symbol.iterator]() {
+    let n1 = 1,
+      n2 =1;
+    return {
+      [Symbol.iterator]() {
+        return this;
+      },
+      next() {
+        const current = n2;
+        n2 = n1;
+        n1 += current;
+        return { value: current, done: false };
+      },
+      return(v) {
+        console.log('stop here');
+        return { value: v, done: true };
+      }
+    };
+  }
+};
+function *foo() {
+  console.log('start');
+  yield 1;
+  console.log('v:1');
+  yield 2;
+  console.log('v:2');
+  yield 3;
+  console.log('v:3');
+  return '4';
 }
+function *bar() {
+  const x = yield *foo();
+  console.log('x:', x);
+  
+}*/
+function printMe() {
+  for(let v of [2,3]) {
+    console.log(v);
+  }
 
+} 
 /* async function async1() {
   console.log('async1 start');
   await async2();
