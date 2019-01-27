@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popconfirm } from 'antd';
-import { EnhanceTable, WithSearch } from '../../components';
+import { EnhanceTable, WithSearch } from 'antd-doddle';
 import Search from './SearchBar';
 import { searchFields, fields } from './fields';
 import Dialog from './HModal';
