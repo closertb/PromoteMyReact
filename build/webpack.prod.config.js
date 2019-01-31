@@ -30,7 +30,7 @@ module.exports = {
       }
     }, {
       test: /\.css$/,
-      use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader'],
+      use: [MiniCssExtractPlugin.loader, 'css-loader'],
     }, {
       test: /\.scss$/,
       use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
@@ -55,7 +55,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.ejs'
     }),
     new MiniCssExtractPlugin({
       filename: './index.css' //文件目录会放入output.path里

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popconfirm } from 'antd';
 import { EnhanceTable, WithSearch } from 'antd-doddle';
+import { DATE_FORMAT } from 'antd-doddle/utils';
 import Search from './SearchBar';
 import { searchFields, fields } from './fields';
 import Dialog from './HModal';
@@ -32,7 +33,9 @@ export default class ExampleTable extends React.Component {
       confirmLoading: false
     };
     this.handleOperate = this.handleOperate.bind(this);
-    this.handleOk = this.handleOk.bind(this);
+    this.handleOk = this.handleOk.bind(this);  
+    console.log('fo', DATE_FORMAT);
+      
   }
   getExtraFields() {
     return [
@@ -78,7 +81,6 @@ export default class ExampleTable extends React.Component {
       });
       break;
     case 'delete':
-      console.log('delete', detail);
       break;
     case 'detail':
       this.setState({
