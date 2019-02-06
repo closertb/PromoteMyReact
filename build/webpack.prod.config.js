@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const args = process.argv;
 
 module.exports = {
@@ -10,8 +11,9 @@ module.exports = {
   devtool: 'inline-source-map',
   mode: 'production',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './dist')
+    filename: 'bundle.[hash].js',
+    chunkFilename: 'async.bundle[chunkhash].js',
+    path: path.resolve(__dirname, '../dist')
   },
 
   module: {
@@ -41,12 +43,16 @@ module.exports = {
   },
   // 公共js单独打包
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
+    ],
     splitChunks: {
-      name: 'async',
+      name: true,
       minSize: 30000,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
+          // name: 'vendor',
           chunks: 'all'
         },
       }
@@ -58,7 +64,7 @@ module.exports = {
       template: './index.ejs'
     }),
     new MiniCssExtractPlugin({
-      filename: './index.css' //文件目录会放入output.path里
+      filename: './index.[hash].css' //文件目录会放入output.path里
     }),
     // 热更新，热更新不是热加载
     new webpack.HotModuleReplacementPlugin(),

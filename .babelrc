@@ -5,9 +5,14 @@
   ],
   "plugins": [
     "transform-object-rest-spread",
-    ["import", {
+/*     ["import", {
       "libraryName": "antd",
+      "libraryDirectory": "lib",
       "style": "css",   // or 'css'
-    }]
+    }, {
+      "libraryName": "antd-doddle",
+      "libraryDirectory": "lib",
+      "style": "css",   // or 'css'
+    }] */
   ]
 }

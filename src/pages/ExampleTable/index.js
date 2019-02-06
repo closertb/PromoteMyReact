@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popconfirm } from 'antd';
-import { EnhanceTable, WithSearch } from 'antd-doddle';
-import { DATE_FORMAT } from 'antd-doddle/utils';
+import { EnhanceTable, WithSearch } from 'antd-doddle'; // ../../components
+// import { DATE_FORMAT, idCodeValid } from 'antd-doddle/utils';
 import Search from './SearchBar';
 import { searchFields, fields } from './fields';
 import Dialog from './HModal';
@@ -34,7 +34,7 @@ export default class ExampleTable extends React.Component {
     };
     this.handleOperate = this.handleOperate.bind(this);
     this.handleOk = this.handleOk.bind(this);  
-    console.log('fo', DATE_FORMAT);
+    // console.log('fo', idCodeValid(23));
       
   }
   getExtraFields() {
