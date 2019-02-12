@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popconfirm } from 'antd';
-import { EnhanceTable, WithSearch } from 'antd-doddle'; // ../../components
+import { EnhanceTable, WithSearch } from '../../components'; // ../../components
 // import { DATE_FORMAT, idCodeValid } from 'antd-doddle/utils';
 import Search from './SearchBar';
 import { searchFields, fields } from './fields';

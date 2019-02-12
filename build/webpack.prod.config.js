@@ -4,12 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const args = process.argv;
 
 module.exports = {
   entry: './src/index.js',
   devtool: 'inline-source-map',
   mode: 'production',
+  devtool: 'none',
   output: {
     filename: 'bundle.[hash].js',
     chunkFilename: 'async.bundle[chunkhash].js',
@@ -59,6 +61,11 @@ module.exports = {
     }
   },
   plugins: [
+    new BundleAnalyzerPlugin(),
+    new webpack.ContextReplacementPlugin(
+      /moment[/\\]locale$/,
+      /zh-cn/,
+    ),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: './index.ejs'
