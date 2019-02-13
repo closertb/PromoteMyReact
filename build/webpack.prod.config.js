@@ -24,8 +24,9 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       loader: 'babel-loader',
       query: {
-        presets: ['env', 'react']
-      }
+        presets: ["@babel/preset-env",
+        "@babel/preset-react"]
+      },
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader',
@@ -61,12 +62,12 @@ module.exports = {
     }
   },
   plugins: [
+    new CleanWebpackPlugin(['../dist']),
     new BundleAnalyzerPlugin(),
     new webpack.ContextReplacementPlugin(
       /moment[/\\]locale$/,
       /zh-cn/,
     ),
-    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: './index.ejs'
     }),
