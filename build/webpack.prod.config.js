@@ -46,9 +46,9 @@ module.exports = {
   },
   // 公共js单独打包
   optimization: {
-    minimizer: [
+/*     minimizer: [
       new UglifyJsPlugin()
-    ],
+    ], */
     splitChunks: {
       name: true,
       minSize: 30000,

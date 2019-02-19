@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "antd": "^3.10.8",
-    "antd-doddle": "0.0.4",
+    "antd-doddle": "0.0.9",
     "moment": "^2.22.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
