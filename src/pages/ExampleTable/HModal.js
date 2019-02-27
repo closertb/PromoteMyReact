@@ -1,10 +1,6 @@
 import React from 'react';
 import { Form, Modal } from 'antd';
 
-function enhanceComponent(component){
-  return component;
-} 
-
 class HModal extends React.Component {
   constructor(props) {
     super(props);
@@ -71,7 +67,7 @@ class HModal extends React.Component {
   }
 
   render() {
-    const { confirmLoading, child, visible, title = '弹窗', form, ...others } = this.props;
+    const { confirmLoading, visible, title = '弹窗', form, ...others } = this.props;
     const modalProps = {
       title,
       confirmLoading,

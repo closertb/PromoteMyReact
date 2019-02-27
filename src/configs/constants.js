@@ -9,11 +9,11 @@ export const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 export const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 6 },
+    sm: { span: 4 },
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 14 },
+    sm: { span: 20 },
   },
 };
 

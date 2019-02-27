@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { Form, Row, Col, Select, DatePicker, TimePicker, Input, InputNumber, Button } from 'antd';
+import { Form, Row, Col, DatePicker, TimePicker, Input, InputNumber, Button, Tooltip } from 'antd';
 import { editFields } from './fields';
-import { formRender, OriginSearchWithRenderProp, DaynamicForm } from '../../components';
+import { formRender, DaynamicForm } from 'antd-doddle';
+import { OriginSearch } from '../../components';
 import { formItemLayout } from '../../configs/constants';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const { RangePicker } = DatePicker;
 const format = 'HH:mm';
 
@@ -45,6 +45,7 @@ class LearnTest extends React.Component {
     FormRender = formRender({ getFieldDecorator });
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   handleChange(value) {
     const {
@@ -64,12 +65,27 @@ class LearnTest extends React.Component {
       console.log(values);
     });
   }
+  handleSelect(value, index, searchRes) {
+    const snapshot = searchRes[index];
+    // return值，既是搜索输入框最终要显示的值
+    return snapshot;
+  }
   render() {
     const { form: { getFieldDecorator } } = this.props;
     const { required } = this.state;
     const originProps = {
+      value: { name: 'dom', id: '92168' },
       searchKey: 'keyword',
-      fetchData: mockFetch 
+      fetchData: mockFetch,
+      format: data => data.map(({ id, name }, index) => ({
+        label: `${name}(${id})`,
+        value: name,
+        key: index
+      })),
+      valueFormat: data => `${data.name || ''}(${data.id || ''})`,
+      maxSize: 20,
+      onSelect: this.handleSelect,
+      allowClear: true
     };
     console.log('df', required);
     return (
@@ -97,13 +113,7 @@ class LearnTest extends React.Component {
           </Col>
           <Col span={8}>
             <FormItem {...formItemLayout} label="renderProps">
-              <OriginSearchWithRenderProp {...originProps}>
-                {(datas) => 
-                  datas.map(({id, name}, index) => (
-                    <Option key={index}>{`${name}(${id})`}</Option>
-                  ))
-                }
-              </OriginSearchWithRenderProp>
+              <OriginSearch {...originProps} />
             </FormItem>
           </Col>   
         </Row>
@@ -176,7 +186,7 @@ class LearnTest extends React.Component {
         <Row>
           <Col span={15}>
             <FormItem {...formItemLayout} label="使用时间限制">
-              <DaynamicForm key="suiteConsumeTimespanArr">
+              <DaynamicForm key="suiteConsumeTimespanArr" canMove >
                 {(rule, actions) => <span key={rule.key}>
                   <TimePicker
                     format={format}
@@ -213,7 +223,8 @@ class LearnTest extends React.Component {
           </Col> 
         </Row>
         <Row>
-          
+          <Col span={8}><Tooltip title="hamap"><div>zhesshazi</div></Tooltip></Col>
+          <Col span={8}><Tooltip title="hamap"><Input value="dkdjdfhdfkdfk"/></Tooltip></Col>
         </Row>
       </Form>
     );

@@ -12,12 +12,14 @@ const forkDatas = [{
   id: 1,
   userName: 'Dom',
   userId: 'closertb',
-  status: 0
+  status: 0,
+  applyTime: 1550973288220
 }, {
   id: 2,
   userName: 'Simon',
   userId: 'simona',
-  status: 1
+  status: 1,
+  applyTime: 1550973288220
 }];
 function enhanceComponent(component) {
   return component;
@@ -101,13 +103,14 @@ export default class ExampleTable extends React.Component {
     const forkProps = {
       fields,
       actions,
+      search,
+      rowKey: 'id',
       datas: forkDatas,
+      extraFields: this.getExtraFields()
     };
     const searchBarProps = {
       search,
       actions,
-      searchFields,
-      operate: this.handleOperate
     };
     const modalProps = {
       title,
@@ -122,7 +125,7 @@ export default class ExampleTable extends React.Component {
     return (
       <div>
         <WithSearch {...searchBarProps} >
-          {props => <Search {...props} searchFields={searchFields} />}
+          {props => <Search {...props} searchFields={searchFields} operate={this.handleOperate}/>}
         </WithSearch>
         <EnhanceTable {...forkProps} rowKey="id" extraFields={this.getExtraFields()} />
         <Dialog {...modalProps}>

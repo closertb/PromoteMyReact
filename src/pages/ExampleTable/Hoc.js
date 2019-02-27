@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popconfirm } from 'antd';
-import { EnhanceTable, WithSearch } from '../../components';
+import { EnhanceTable, WithSearch } from 'antd-doddle';
 import Search from './SearchBar';
 import { searchFields, fields } from './fields';
 import withModal from './withModal';
@@ -12,13 +12,16 @@ const forkDatas = [{
   id: 1,
   userName: 'Dom',
   userId: 'closertb',
-  status: 0
+  status: 0,
+  applyTime: 1550973288220
 }, {
   id: 2,
   userName: 'Simon',
   userId: 'simona',
-  status: 1
+  status: 1,
+  applyTime: 1550973288220
 }];
+
 export default class ExampleHoc extends React.Component {
   constructor(props) {
     super(props);
