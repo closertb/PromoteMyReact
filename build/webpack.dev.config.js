@@ -3,14 +3,16 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const args = process.argv;
 
 module.exports = {
   entry: './src/index.js',
   devtool: 'inline-source-map',
-  mode: 'development',
+  mode: 'production',
   output: {
     filename: 'bundle.js',
+    chunkFilename: 'async.bundle[chunkhash].js',
     path: path.resolve(__dirname, '../dist')
   },
   devServer: {
@@ -53,6 +55,9 @@ module.exports = {
   },
   // 公共js单独打包
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
+    ],
     splitChunks: {
       name: 'async',
       minSize: 30000,

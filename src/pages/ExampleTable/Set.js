@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin } from 'antd';
 import { editFields } from './fields';
-import { formRender } from '../../components';
+import { formRender } from 'antd-doddle';
 
 let FormRender;
 export default class Set extends React.Component {

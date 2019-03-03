@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "this project is based on reactTemplate",
   "main": "index.js",
+  "sideEffects": false,
   "scripts": {
     "build": "webpack --config ./build/webpack.prod.config.js",
     "start": "webpack-dev-server --config ./build/webpack.dev.config.js"
@@ -43,7 +44,7 @@
   },
   "dependencies": {
     "antd": "^3.10.8",
-    "antd-doddle": "0.0.9",
+    "antd-doddle": "0.0.11",
     "moment": "^2.22.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

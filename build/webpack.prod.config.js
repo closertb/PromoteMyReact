@@ -9,7 +9,6 @@ const args = process.argv;
 
 module.exports = {
   entry: './src/index.js',
-  devtool: 'inline-source-map',
   mode: 'production',
   devtool: 'none',
   output: {
@@ -45,9 +44,6 @@ module.exports = {
   },
   // 公共js单独打包
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin()
-    ],
     splitChunks: {
       name: true,
       minSize: 30000,
@@ -74,7 +70,7 @@ module.exports = {
       filename: './index.[hash].css' //文件目录会放入output.path里
     }),
     // 热更新，热更新不是热加载
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
+    // new webpack.NamedModulesPlugin(),
   ],
 };

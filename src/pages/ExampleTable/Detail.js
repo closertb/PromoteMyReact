@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spin } from 'antd';
-import { RenderDetail } from '../../components';
+import { RenderDetail } from 'antd-doddle';
 
 import { fields } from './fields';
 export default function Detail(props) {

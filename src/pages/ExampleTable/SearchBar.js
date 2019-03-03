@@ -12,7 +12,7 @@ function SearchBar(props) {
             {formRender({ field, data: search })}
           </Col>
         ))}
-        <div style={{ paddingTop: 2 }}>
+        <div style={{ paddingTop: 2 }}>   
           <Button type="primary" onClick={onSearch}>搜索</Button>
           <Button className="ml-20" onClick={() => operate('add')}>新增用户</Button>
         </div>

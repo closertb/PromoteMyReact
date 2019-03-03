@@ -2,7 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { Form, Row, Col, Select, DatePicker, TimePicker, Input, InputNumber, Button } from 'antd';
 import { editFields } from './fields';
-import { formRender, OriginSearchWithRenderProp, DaynamicForm } from '../../components';
+import { formRender, DaynamicForm } from 'antd-doddle';
+import OriginSearchWithRenderProp from '../../components/OriginSearchWithRenderProp';
 import { formItemLayout } from '../../configs/constants';
 
 const FormItem = Form.Item;
