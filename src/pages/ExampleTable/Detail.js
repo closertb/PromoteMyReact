@@ -36,5 +36,4 @@ export default function Detail(props) {
       <RenderDetail fields={privateFields} detail={forkDatas.noInfo} fieldsName="自定义未婚信息" />
     </Spin>
   );
-
 }
