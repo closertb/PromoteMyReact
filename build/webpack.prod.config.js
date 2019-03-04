@@ -3,7 +3,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const args = process.argv;
 
@@ -46,9 +45,6 @@ module.exports = {
   },
   // 公共js单独打包
   optimization: {
-/*     minimizer: [
-      new UglifyJsPlugin()
-    ], */
     splitChunks: {
       name: true,
       minSize: 30000,
@@ -74,8 +70,5 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: './index.[hash].css' //文件目录会放入output.path里
     }),
-    // 热更新，热更新不是热加载
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
   ],
 };
