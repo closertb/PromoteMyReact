@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import bind from 'bind-decorator'; 
 import { Form, Row, Col, DatePicker, TimePicker, Input, InputNumber, Button, Tooltip } from 'antd';
 import { editFields } from './fields';
 import { formRender, DaynamicForm } from 'antd-doddle';
@@ -43,10 +44,8 @@ class LearnTest extends React.Component {
     const { form: { getFieldDecorator } } = props;
     this.state = {};
     FormRender = formRender({ getFieldDecorator });
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
+  @bind
   handleChange(value) {
     const {
       form: { validateFields }
@@ -55,7 +54,9 @@ class LearnTest extends React.Component {
       if (!value) {
         validateFields(['reason'], { force: true });
       }
-    });  }
+    });  
+  }
+  @bind
   handleSubmit() {
     const { form: { validateFields } } = this.props;
     validateFields((errors, values) => {
@@ -65,10 +66,20 @@ class LearnTest extends React.Component {
       console.log(values);
     });
   }
+  @bind
   handleSelect(value, index, searchRes) {
     const snapshot = searchRes[index];
     // return值，既是搜索输入框最终要显示的值
     return snapshot;
+  }
+  @bind
+  handlePost() {
+    fetch('http://localhost:3000/web/api/users/create?name=dm&ag=5', {
+      method: 'get',
+      mode: 'cors',
+    }).then((res) => {
+      console.log('res', res);
+    })
   }
   render() {
     const { form: { getFieldDecorator } } = this.props;
@@ -225,6 +236,7 @@ class LearnTest extends React.Component {
         <Row>
           <Col span={8}><Tooltip title="hamap"><div>zhesshazi</div></Tooltip></Col>
           <Col span={8}><Tooltip title="hamap"><Input value="dkdjdfhdfkdfk"/></Tooltip></Col>
+          <Button type="primary" onClick={this.handlePost}>发送请求</Button>
         </Row>
       </Form>
     );
