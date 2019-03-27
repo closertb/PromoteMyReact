@@ -40,12 +40,12 @@ function *bar() {
   const x = yield *foo();
   console.log('x:', x);
   
-}*/
+}
 function printMe() {
   for(let v of [2,3]) {
     console.log(v);
   }
-} 
+} */
 /* async function async1() {
   console.log('async1 start');
   await async2();
@@ -109,7 +109,6 @@ function asyncRun(taskDef) {
     if(!result.done) {
       let promise = Promise.resolve(result.value);
       promise.then(value => {
-        console.log('val:', result);
         result = task.next(value);
         step();
       }).catch((err) => {
@@ -120,17 +119,14 @@ function asyncRun(taskDef) {
     }
   }());
 }
-const forkWait = new Promise(resolve => setTimeout(() => {
-  resolve('finish');
-}, 1000));
 
-function request(url, callback) {
-  return new Promise(() => setTimeout(() => {
-    callback(url);
+function request(url) {
+  return new Promise((resolve) => setTimeout(() => {
+    resolve(url);
   }, 1000));
 }
 function *wait() {
-  yield request('fuck test', (data) => { console.log('da:', data);});
+  yield request('fuck test');
   console.log('finally');
 }
 
@@ -161,8 +157,6 @@ function *compose() {
   const res = yield *create(count);
   return res;
 }
-// run(asyncfun);
 
-// run(compose);
-// asyncRun(compose);
-asyncRun(wait);
+run(compose);
+asyncRun(compose);
