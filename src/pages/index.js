@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from 'react-router-dom'; // HashRouter as Router, 
+import { Route, Switch, Link } from 'react-router-dom'; // HashRouter as Router,
 import { Layout, Menu, Icon } from 'antd';
 import menus from '../configs/menus';
 import ExampleTable from './ExampleTable';

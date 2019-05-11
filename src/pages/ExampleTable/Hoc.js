@@ -7,21 +7,17 @@ import withModal from './withModal';
 import Edit from './Set';
 import Detail from './Detail';
 
-
 const forkDatas = [{
   id: 1,
   userName: 'Dom',
   userId: 'closertb',
-  status: 0,
-  applyTime: 1550973288220
+  status: 0
 }, {
   id: 2,
   userName: 'Simon',
   userId: 'simona',
-  status: 1,
-  applyTime: 1550973288220
+  status: 1
 }];
-
 export default class ExampleHoc extends React.Component {
   constructor(props) {
     super(props);

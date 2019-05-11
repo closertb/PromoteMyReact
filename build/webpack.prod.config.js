@@ -59,7 +59,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['../dist']),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.ContextReplacementPlugin(
       /moment[/\\]locale$/,
       /zh-cn/,
