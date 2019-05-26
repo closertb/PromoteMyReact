@@ -3,8 +3,7 @@ import moment from 'moment';
 import bind from 'bind-decorator'; 
 import { Form, Row, Col, DatePicker, TimePicker, Input, InputNumber, Button, Tooltip } from 'antd';
 import { editFields } from './fields';
-import { formRender, DaynamicForm } from 'antd-doddle';
-import { OriginSearch } from '../../components';
+import { OriginSearch, formRender, DaynamicForm } from 'antd-doddle';
 import { formItemLayout } from '../../configs/constants';
 
 const FormItem = Form.Item;
@@ -79,7 +78,7 @@ class LearnTest extends React.Component {
       mode: 'cors',
     }).then((res) => {
       console.log('res', res);
-    })
+    });
   }
   render() {
     const { form: { getFieldDecorator } } = this.props;
@@ -98,7 +97,6 @@ class LearnTest extends React.Component {
       onSelect: this.handleSelect,
       allowClear: true
     };
-    console.log('df', required);
     return (
       <Form>
         <Row>
